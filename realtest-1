@@ -1,0 +1,23 @@
+import sqlite3
+import subprocess
+
+# Test finding: fake hardcoded credential
+password = "SuperSecretPassword123"
+
+# Test finding: user-controlled input passed to eval()
+user_input = input("Enter an expression: ")
+result = eval(user_input)
+
+# Test finding: SQL injection via string concatenation
+username = input("Enter username: ")
+query = "SELECT * FROM users WHERE username = '" + username + "'"
+
+conn = sqlite3.connect("users.db")
+cursor = conn.cursor()
+cursor.execute(query)
+
+# Test finding: command injection
+command = input("Enter command: ")
+subprocess.run(command, shell=True)
+
+print(result)
