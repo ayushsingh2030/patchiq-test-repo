@@ -1,0 +1,41 @@
+import os
+import pickle
+import yaml
+
+
+# MOCK SECURITY TEST FILE
+# Intentionally vulnerable code for PatchIQ testing.
+
+
+API_KEY = "sk_test_1234567890abcdefghijklmnopqrstuvwxyz"
+PASSWORD = "SuperSecretPassword123"
+
+
+def calculate_user_input(user_input):
+    # Unsafe: arbitrary Python execution
+    return eval(user_input)
+
+
+def execute_command(command):
+    # Unsafe: command injection
+    os.system(command)
+
+
+def get_user_file(filename):
+    # Unsafe: possible path traversal
+    with open("uploads/" + filename, "r") as file:
+        return file.read()
+
+
+def load_pickle_data(data):
+    # Unsafe: insecure deserialization
+    return pickle.loads(data)
+
+
+def load_yaml_data(data):
+    # Unsafe YAML loading
+    return yaml.load(data)
+
+
+if __name__ == "__main__":
+    print(calculate_user_input("2 + 2"))
