@@ -1,0 +1,89 @@
+import os
+import pickle
+import yaml
+import subprocess
+import sqlite3
+
+
+# ==========================================================
+# PATCHIQ ULTIMATE SECURITY TEST
+# Intentionally vulnerable code. DO NOT USE IN PRODUCTION.
+# ==========================================================
+
+
+# 1. HARDCODED SECRET / CREDENTIALS
+API_KEY = "abcdefghijklmnopqrstuvwxyz1234567890"
+PASSWORD = "SuperSecretPassword123456"
+SECRET_TOKEN = "very_long_fake_secret_token_123456"
+
+
+# 2. UNSAFE EVAL / EXEC
+def unsafe_eval(user_input):
+    return eval(user_input)
+
+
+def unsafe_exec(user_code):
+    exec(user_code)
+
+
+# 3. COMMAND INJECTION
+def run_command(user_command):
+    os.system(user_command)
+
+
+def run_subprocess(user_input):
+    subprocess.run(
+        f"echo {user_input}",
+        shell=True
+    )
+
+
+# 4. SQL INJECTION
+def get_user(username):
+    connection = sqlite3.connect("users.db")
+    cursor = connection.cursor()
+
+    query = (
+        "SELECT * FROM users "
+        "WHERE username = '" + username + "'"
+    )
+
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+def delete_user(user_id):
+    connection = sqlite3.connect("users.db")
+    cursor = connection.cursor()
+
+    query = f"DELETE FROM users WHERE id = {user_id}"
+
+    cursor.execute(query)
+    connection.commit()
+
+
+# 5. PATH TRAVERSAL
+def read_user_file(filename):
+    with open(
+        "uploads/" + filename,
+        "r"
+    ) as file:
+        return file.read()
+
+
+# 6. INSECURE DESERIALIZATION
+def load_user_data(data):
+    return pickle.loads(data)
+
+
+# 7. UNSAFE YAML LOADING
+def load_yaml_data(data):
+    return yaml.load(data)
+
+
+# ==========================================================
+# TEST
+# ==========================================================
+
+if __name__ == "__main__":
+    print("PatchIQ ultimate vulnerability test")
