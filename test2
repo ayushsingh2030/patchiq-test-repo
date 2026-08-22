@@ -1,0 +1,26 @@
+import os
+import pickle
+import yaml
+
+API_KEY = "sk_test_1234567890abcdefghijklmnopqrstuvwxyz"
+PASSWORD = "SuperSecretPassword123"
+
+def calculate_user_input(user_input):
+    return eval(user_input)
+
+def execute_command(command):
+    os.system(command)
+
+def get_user_file(filename):
+    with open("uploads/" + filename, "r") as file:
+        return file.read()
+
+def load_pickle_data(data):
+    return pickle.loads(data)
+
+def load_yaml_data(data):
+    return yaml.load(data, Loader=yaml.Loader)
+
+def find_user(cursor, username):
+    query = "SELECT * FROM users WHERE username = '" + username + "'"
+    cursor.execute(query)
