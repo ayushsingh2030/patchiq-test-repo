@@ -1,0 +1,12 @@
+# ===== PATCHIQ SECRET DETECTION TEST =====
+
+API_KEY = "sk-test-FAKE1234567890abcdef"
+OPENAI_API_KEY = "sk-proj-test-FAKEabcdefghijklmnop123456"
+GITHUB_TOKEN = "ghp_FAKE1234567890abcdefghijklmnop"
+AWS_ACCESS_KEY_ID = "AKIAFAKE1234567890"
+AWS_SECRET_ACCESS_KEY = "FAKEsecretKey1234567890abcdef"
+AUTH_TOKEN = "Bearer FAKE_TOKEN_1234567890abcdef"
+JWT_SECRET = "fake-super-secret-jwt-key-123456789"
+CLIENT_SECRET = "fake-client-secret-987654321"
+DATABASE_PASSWORD = "FakeDatabasePassword123!"
+STRIPE_API_KEY = "sk_test_FAKE123456789"
