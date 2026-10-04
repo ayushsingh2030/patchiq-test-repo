@@ -1,0 +1,39 @@
+import yaml
+import os
+
+def load_config():
+    print("Configuration Manager")
+    
+    filename = input("Enter configuration filename: ")
+
+    if not filename:
+        print("No filename provided.")
+        return
+
+    filepath = os.path.join("./configs", filename)
+
+    try:
+        with open(filepath, "r") as config_file:
+            config_data = config_file.read()
+
+        # Vulnerable: unsafe YAML loading
+        config = yaml.load(
+            config_data,
+            Loader=yaml.Loader
+        )
+
+        print("Configuration loaded:")
+        print(config)
+
+    except Exception as error:
+        print("Failed to load configuration:", error)
+
+
+def main():
+    print("PatchIQ-iA Configuration Tool")
+    print("-----------------------------")
+    load_config()
+
+
+if __name__ == "__main__":
+    main()
