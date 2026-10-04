@@ -1,0 +1,14 @@
+import os
+import pickle
+import subprocess
+
+API_KEY = "sk_test_123456789abcdef"
+
+user_input = input("Enter command: ")
+os.system(user_input)
+
+data = input("Enter serialized data: ")
+obj = pickle.loads(data)
+
+filename = input("Enter filename: ")
+subprocess.run(f"cat {filename}", shell=True)
