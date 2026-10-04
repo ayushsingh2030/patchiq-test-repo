@@ -1,0 +1,33 @@
+import pickle
+import base64
+
+def load_profile():
+    print("User Profile Loader")
+    
+    encoded_data = input("Enter encoded profile data: ")
+
+    if not encoded_data:
+        print("No data provided.")
+        return
+
+    try:
+        decoded_data = base64.b64decode(encoded_data)
+
+        # Vulnerable: untrusted data is deserialized using pickle
+        profile = pickle.loads(decoded_data)
+
+        print("Profile loaded successfully:")
+        print(profile)
+
+    except Exception as error:
+        print("Failed to load profile:", error)
+
+
+def main():
+    print("PatchIQ-iA Profile Manager")
+    print("--------------------------")
+    load_profile()
+
+
+if __name__ == "__main__":
+    main()
