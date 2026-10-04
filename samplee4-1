@@ -1,0 +1,33 @@
+import pickle
+
+
+def load_user_data():
+    print("User Data Loader")
+    print("----------------")
+
+    data = input("Enter serialized user data: ")
+
+    if not data:
+        print("No data provided.")
+        return
+
+    try:
+        # Vulnerable: user-controlled data is directly deserialized
+        user_data = pickle.loads(data)
+
+        print("User data loaded successfully:")
+        print(user_data)
+
+    except Exception as error:
+        print("Failed to load user data:", error)
+
+
+def main():
+    print("PatchIQ-iA User Data Manager")
+    print("----------------------------")
+
+    load_user_data()
+
+
+if __name__ == "__main__":
+    main()
