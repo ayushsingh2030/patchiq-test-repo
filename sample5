@@ -1,0 +1,30 @@
+import yaml
+
+
+def load_configuration():
+    print("Configuration Loader")
+    print("--------------------")
+
+    data = input("Enter YAML configuration: ")
+
+    if not data:
+        print("No configuration provided.")
+        return
+
+    try:
+        # Vulnerable: user-controlled YAML is loaded unsafely
+        config = yaml.load(data)
+
+        print("Configuration loaded:")
+        print(config)
+
+    except Exception as error:
+        print("Failed to load configuration:", error)
+
+
+def main():
+    load_configuration()
+
+
+if __name__ == "__main__":
+    main()
