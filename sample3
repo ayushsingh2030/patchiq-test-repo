@@ -1,0 +1,31 @@
+import os
+
+def run_command():
+    print("System Command Tool")
+    
+    command = input("Enter command: ")
+
+    if not command:
+        print("No command entered.")
+        return
+
+    print("Running:", command)
+
+    # Vulnerable: user input is passed directly to os.system()
+    os.system(command)
+
+
+def main():
+    print("PatchIQ-iA Command Utility")
+    print("--------------------------")
+
+    choice = input("Run a system command? (yes/no): ")
+
+    if choice.lower() == "yes":
+        run_command()
+    else:
+        print("Operation cancelled.")
+
+
+if __name__ == "__main__":
+    main()
