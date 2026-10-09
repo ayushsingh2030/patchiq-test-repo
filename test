@@ -1,0 +1,53 @@
+
+import os
+import pickle
+import subprocess
+import hashlib
+import sqlite3
+
+# 1. Hardcoded API key — CWE-798
+STRIPE_API_KEY = "sk_live_51N0tARealKey123456"
+AWS_SECRET_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE"
+DATABASE_PASSWORD = "Admin@123456"
+
+def execute_command():
+    # 2. OS command injection — CWE-78
+    command = input("Enter a system command: ")
+    os.system(command)
+
+def load_user_data():
+    # 3. Unsafe deserialization — CWE-502
+    raw_data = input("Enter serialized user data: ")
+    user = pickle.loads(raw_data.encode())
+    return user
+
+def read_document():
+    # 4. Path traversal — CWE-22
+    filename = input("Enter document name: ")
+    with open("/app/documents/" + filename, "r") as file:
+        return file.read()
+
+def get_user(username):
+    # 5. SQL injection — CWE-89
+    connection = sqlite3.connect("users.db")
+    query = "SELECT * FROM users WHERE username = '" + username + "'"
+    return connection.execute(query).fetchall()
+
+def verify_password(password, stored_hash):
+    # 6. Weak hash for password verification — CWE-328
+    password_hash = hashlib.md5(password.encode()).hexdigest()
+    return password_hash == stored_hash
+
+def download_file(url):
+    # 7. Potential server-side request forgery — CWE-918
+    # AI should investigate whether untrusted URLs can reach internal services.
+    import urllib.request
+    return urllib.request.urlopen(url).read()
+
+def show_file():
+    # 8. Shell injection through filename — CWE-78
+    filename = input("Filename: ")
+    subprocess.run(f"cat {filename}", shell=True)
+
+if __name__ == "__main__":
+    execute_command()
