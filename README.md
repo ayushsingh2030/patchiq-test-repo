@@ -1,4 +1,7 @@
-5th attempt after chaging the client id and making sure it debugs in my uvicorn terminal
-3rd attempt for changes # patchiq-test-repo
-4th atempt at working aftter commiting changes in my main.py 
+# PatchIQ-iA Test Repository
 
+This repository is created **for testing purposes only** as part of the PatchIQ-iA project.
+
+It is used to test the functionality of the PatchIQ-iA AI-powered code review agent, including pull request analysis and automated code review comments.
+
+**Note:** This is a test repository and is not intended for production use.
